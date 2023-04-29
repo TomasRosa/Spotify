@@ -1,8 +1,8 @@
 public class Artista
 {
-    String nombre;
-    int edad;
-    String nacionalidad;
+    String nombre; ///Nombre artista.
+    int edad; ///Edad artista.
+    String nacionalidad;///Nacionalidad artista.
 
     public Artista ()
     {
