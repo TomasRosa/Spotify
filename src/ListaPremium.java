@@ -21,13 +21,9 @@ public class ListaPremium implements Reproduccion
     }
 
     @Override
-    public void Reproducir() ///Dudas cambiar cancion y reproducir. Si yo cambio la cancion, al llamar metodo reproducir me tendrian que aparecer las caracteristicas de la nueva cancion? no comprendo eso.
+    public void Reproducir() ///Dudas sobre si esto esta bien. Siento que para que tenga una funcionalidad habria que llevar la cancion elegida al inicio de la playlist o algo de eso.
     {
         Scanner scan = new Scanner(System.in);
-
-        System.out.println("Playlist: ");
-
-        verPlaylist();
 
         System.out.println("Ingrese el nombre de la cancion que deseas escuchar. ");
         String nombre = scan.nextLine();
@@ -40,14 +36,24 @@ public class ListaPremium implements Reproduccion
         }
         else
         {
+            ///Si la cancion se encontro se manda la cancion del inicio al final.
+            ///Guardo la primera cancion en cancion inicio para no perderla.
+            Cancion cancionInicio = this.miLista.get(0);
+            ///Agrego la cancion encontrada al inicio.
+            this.miLista.add(0,cancionARetornar);
+            int finalLista = this.miLista.size();
+            ///Agrego la cancion del inicio al final.
+            ///finalLista+1 para no sobreescribir ultima cancion.
+            this.miLista.add(finalLista,cancionInicio);
+
             System.out.println("Cancion encontrada correctamente.");
-            System.out.println("Cancion en reproduccion: " + cancionARetornar.getNombre());
-            System.out.println("Nombre del album: " + cancionARetornar.getAlbum().getTitulo());
-            System.out.println("Genero de la cancion: " + cancionARetornar.getGenero());
-            System.out.println("Nombre del artista que la canta: " + cancionARetornar.getAlbum().getArtista());
+            System.out.println("Cancion en reproduccion: " + this.miLista.get(0).getNombre());
+            System.out.println("Nombre del album: " + this.miLista.get(0).getAlbum().getTitulo());
+            System.out.println("Genero de la cancion: " + this.miLista.get(0).getGenero());
+            System.out.println("Nombre del artista que la canta: " + this.miLista.get(0).getAlbum().getArtista().getNombre());
             if(cancionARetornar.getArtistaInvitado() != null)
             {
-                System.out.println("Artista invitado que participa en la cancion: " + cancionARetornar.getArtistaInvitado());
+                System.out.println("Artista invitado que participa en la cancion: " + this.miLista.get(0).getArtistaInvitado().getNombre());
             }
             else
             {
@@ -66,11 +72,11 @@ public class ListaPremium implements Reproduccion
     @Override
     public void eliminarCancion(String nombreCancion)
     {
-        for(Cancion cancioncita: this.miLista)
+        for(int i = 0; i < this.miLista.size(); i++)
         {
-            if(cancioncita.getNombre().equalsIgnoreCase(nombreCancion))
+            if(this.miLista.get(i).getNombre().equalsIgnoreCase(nombreCancion))
             {
-                this.miLista.remove(cancioncita);
+                this.miLista.remove(i);
             }
         }
     }
@@ -80,7 +86,11 @@ public class ListaPremium implements Reproduccion
     {
         for(Cancion cancioncita: this.miLista)
         {
-            System.out.println(cancioncita.getNombre());
+            System.out.println(cancioncita.getNombre() + " de " + cancioncita.getAlbum().getArtista().getNombre());
+            if(cancioncita.getArtistaInvitado() != null)
+            {
+                System.out.println("y de " + cancioncita.getArtistaInvitado().getNombre());
+            }
         }
     }
 
@@ -88,13 +98,11 @@ public class ListaPremium implements Reproduccion
     public void cambiarCancion(String cancionAElegir)
     {
         ///Muestro nombre de la cancion en reproduccion. (La primera)
-        System.out.println("Cancion en reproduccion: ");
-        this.miLista.get(0).getNombre();
+        System.out.println("Cancion en reproduccion: " + this.miLista.get(0).getNombre());
         ///Llevo la primera cancion al final ya que se va a cambiar la cancion.
-        ///Paso como parametro finalList + 1 para no sobreescribir la ultima cancion.
         ///Como segundo parametro paso la cancion a pasar al ultimo lugar.
         int finalList = this.miLista.size();
-        this.miLista.add(finalList+1,this.miLista.get(0));
+        this.miLista.add(finalList,this.miLista.get(0));
 
         Cancion cancionAEscuchar = buscarCancion(cancionAElegir);
 

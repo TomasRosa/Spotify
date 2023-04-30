@@ -8,12 +8,12 @@ public class ListaBasica implements Reproduccion
 
     public ListaBasica ()
     {
-
+        this.miLista = new Stack<Cancion>();
     }
-    public ListaBasica(String nombre, Stack<Cancion> miLista)
+    public ListaBasica(String nombre)
     {
         this.nombre = nombre;
-        this.miLista = miLista;
+        this.miLista = new Stack<Cancion>();
     }
     public void pasarCancionesDeArrayListToStack (ArrayList<Cancion> playlist)
     {
@@ -25,22 +25,20 @@ public class ListaBasica implements Reproduccion
     @Override
     public void Reproducir()
     {
-        Cancion cancionEnReproduccion = this.miLista.peek();
+        ///Cancion de la primera posicion = cancion reproduciendose.
 
-        System.out.println("Cancion en reproduccion: " + cancionEnReproduccion.getNombre());
-        System.out.println("Nombre del album: " + cancionEnReproduccion.getAlbum().getTitulo());
-        System.out.println("Genero de la cancion: " + cancionEnReproduccion.getGenero());
-        System.out.println("Nombre del artista que la canta: " + cancionEnReproduccion.getAlbum().getArtista());
-        if(cancionEnReproduccion.getArtistaInvitado() != null)
+        System.out.println("Cancion en reproduccion: " + this.miLista.get(0).getNombre());
+        System.out.println("Nombre del album: " + this.miLista.get(0).getAlbum().getTitulo());
+        System.out.println("Genero de la cancion: " + this.miLista.get(0).getGenero());
+        System.out.println("Nombre del artista que la canta: " + this.miLista.get(0).getAlbum().getArtista().getNombre());
+        if(this.miLista.get(0).getArtistaInvitado() != null)
         {
-            System.out.println("Artista invitado que participa en la cancion: " + cancionEnReproduccion.getArtistaInvitado());
+            System.out.println("Artista invitado que participa en la cancion: " + this.miLista.get(0).getArtistaInvitado().getNombre());
         }
         else
         {
             System.out.println("No hay artista invitado en esta cancion.");
         }
-        ///Una vez reproducida mando la cancion del tope (reproducida) al final.
-        this.miLista.push(cancionEnReproduccion);
     }
 
     @Override
@@ -60,7 +58,11 @@ public class ListaBasica implements Reproduccion
     {
         for(Cancion pilita: this.miLista)
         {
-            System.out.println(pilita.getNombre());
+            System.out.println(pilita.getNombre() + " de " + pilita.getAlbum().getArtista().getNombre());
+            if(pilita.getArtistaInvitado() != null)
+            {
+                System.out.println("y de " + pilita.getArtistaInvitado().getNombre());
+            }
         }
     }
 
