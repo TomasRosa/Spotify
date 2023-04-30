@@ -38,6 +38,10 @@ public class Main {
                             System.out.println("Ingrese la letra 'p' si desea pausar la reproduccion y volver al menu. ");
                             System.out.println("Si ingresa cualquier otra letra que no sea la 'p' el programa se cerrara. ");
                             controlP = scan.next().charAt(0);
+                            if(controlP == 'p')
+                            {
+                                System.out.println("Cancion pausada. Volviendo al menu principal...");
+                            }
                             break;
                         }
                         case 2: {
@@ -164,6 +168,10 @@ public class Main {
                             System.out.println("Ingrese la letra 'p' si desea pausar la reproduccion y volver al menu. ");
                             System.out.println("Si ingresa cualquier otra letra que no sea la 'p' el programa se cerrara. ");
                             controlP = scan.next().charAt(0);
+                            if(controlP == 'p')
+                            {
+                                System.out.println("Cancion pausada. Volviendo al menu principal...");
+                            }
                             break;
                         }
                         case 2: {
