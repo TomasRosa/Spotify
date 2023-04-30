@@ -60,7 +60,6 @@ public class ListaPremium implements Reproduccion
                 System.out.println("No hay artista invitado en esta cancion.");
             }
         }
-
     }
 
     @Override

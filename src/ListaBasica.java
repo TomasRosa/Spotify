@@ -39,6 +39,12 @@ public class ListaBasica implements Reproduccion
         {
             System.out.println("No hay artista invitado en esta cancion.");
         }
+        ///Una vez que fue reproducida, la mando al final
+        this.miLista.push(this.miLista.get(0));
+        ///Y la elimino de la primero posicion.
+        this.miLista.remove(0);
+        System.out.println("Nueva en primera posicion: ");
+        System.out.println(this.miLista.get(0).getNombre());
     }
 
     @Override
@@ -69,7 +75,7 @@ public class ListaBasica implements Reproduccion
     @Override
     public void cambiarCancion(String cancionAElegir)
     {
-        System.out.println("Para acceder a esta opcion pague el pack premium. ");
+        System.out.println("Para escuchar la cancion: " + cancionAElegir + "pague el pack premium.");
     }
 }
 
